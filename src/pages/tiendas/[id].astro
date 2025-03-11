@@ -1,0 +1,125 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Footer from '@/components/Footer.astro';
+
+export async function getStaticPaths(){
+	return[
+		{
+			params:{id:"iturbi"},
+			props:{
+                banner:"/images/hero.jpg",
+				name:"José Iturbi 10",
+				contact:"961 290 180",
+				schedule:"De Martes a Domingo - 09:00am a 15:30pm",
+				maps:"https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3081.347195148093!2d-0.461613!3d39.438884!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6051ce7879a7ed%3A0xded3e1932b7c81ae!2sEspecialidad%20en%20pollos%20asado%20hermanos%20Fern%C3%A1ndez%20Ruiz!5e0!3m2!1ses!2ses!4v1741691789222!5m2!1ses!2ses",
+			}
+		},
+        {
+            params:{id:"san-fermin"},
+            props:{
+                banner:"/images/placeholder.png",
+                name:"San Fermín 1",
+                contact:"961 575 412",
+                schedule:"De Martes a Domingo - 09:00am a 15:30pm",
+                maps:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d770.398949669583!2d-0.47166394759807384!3d39.43326376137471!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6051b9d3249c07%3A0x530726b6ce621d49!2sEspecialidad%20en%20Pollos%20Asados%20Hermanos%20Fern%C3%A1ndez%20Ruiz!5e0!3m2!1ses!2ses!4v1741692620674!5m2!1ses!2ses"
+            }
+        },
+        {
+            params:{id:"alaquas"},
+            props:{
+                banner:"/images/placeholder.png",
+                name:"Av. Blasco Ibañez 25",
+                contact:"961 506 013",
+                schedule:"De Martes a Domingo - 09:00am a 15:30pm",
+                maps:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d770.1333785412977!2d-0.4532384224658769!3d39.457274393144445!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd605026561f3f7d%3A0x1fef6073b16c5419!2sPollos%20Asados%20Hnos.%20Fern%C3%A1ndez%20Ruiz!5e0!3m2!1ses!2ses!4v1741692658784!5m2!1ses!2ses"
+            }
+        },
+        {
+            params:{id:"picaña"},
+            props:{
+                banner:"/images/placeholder.png",
+                contact:"961 592 535",
+                schedule:"De Martes a Domingo - 09:00am a 15:30pm",
+                maps:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d770.3801590054798!2d-0.4358736699933137!3d39.43496305196596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd604e3747783c85%3A0x306667ab0e483e5a!2sESPECIALIDAD%20EN%20Pollos%20Asados%20Hermanos%20Fern%C3%A1ndez%20Ruiz!5e0!3m2!1ses!2ses!4v1741692553831!5m2!1ses!2ses"
+            }
+        },
+	]
+
+   
+}
+
+const location = Astro.props;
+
+const name = location.name;
+const banner = location.banner;
+const contact = location.contact;
+const schedule = location.schedule;
+const map = location.maps;
+
+---
+
+<Layout>
+	<section class="relative bg-primary h-100 lg:h-125">
+        <nav class="w-full h-16 lg:h-20 bg-transparent flex justify-between p-5 items-center z-50">
+        
+            <div class="mr-5 max-w-[70px] lg:max-h-[80px] mt-" >
+               <a href="/"><img src="/images/logo.png" alt=""></a>
+            </div>
+            
+            <div class="hidden lg:flex gap-20 justify-between items-center">
+                <ul class="flex gap-8">
+                    <li class="text-xl font-semibold text-white"><a href="/">Inicio</a></li>
+                    <li class="text-xl font-semibold text-white"><a href="/#products">Nuestros Productos</a></li>
+                    <li class="text-xl font-semibold text-white"><a href="/#shops">Encuentranos</a></li>
+                </ul>
+            </div>
+           
+        </nav>
+        
+        <div class="relative h-full text-white overflow-hidden">
+            
+            <div class="absolute inset-0">
+              <img src=`${banner}` alt="Empleado de Pollos Asados Hnos. Fernández Ruíz Trabajando" class="object-cover object-center w-full h-full" />
+              <div class="absolute inset-0 bg-black opacity-50"></div>
+            </div>
+            
+            <div class="relative z-10 flex flex-col justify-center items-center h-full text-center">
+              <h1 class="lg:text-9xl text-5xl font-bold lg:leading-[1] mb-4 mx-4"> {name} </h1>
+            </div>
+          </div>
+        </section>
+        
+        <section class="relative my-30 lg:my-50 px-6 lg:mx-30 flex flex-col " >
+            <div class="grid grid-cols-2 items-center gap-10 ">
+                <div class="col-span-2 lg:col-span-1 w-full h-full my-6 lg:my-10">
+                    <div class="w-full uppercase text-center lg:text-7xl text-5xl text-white font-bold">
+                        Teléfono
+                    </div>
+                    <div class="w-full text-theme-button text-2xl font-semibold pt-4 text-center">
+                       <a href=`tel:${ contact }` target="_blank" rel="noopener noreferrer">{ contact }
+                    </div>
+                </div>
+                <div class=" col-span-2 lg:col-span-1 w-full h-full my-6 lg:my-10">
+                    <div class="w-full uppercase text-center lg:text-7xl text-5xl text-white font-bold">
+                        Horarios
+                    </div>
+                    <div class="w-full text-white text-2xl font-semibold pt-4 text-center">
+                        {schedule}
+                    </div>
+                </div>
+                <div class="col-span-2 h-full flex flex-col items-center">
+                    <iframe class=" w-full xl:w-[80%] relative h-100 lg:h-200" 
+                        src=`${map}` 
+                        title="posicion de la tienda"
+                        style="border:0;" 
+                        allowfullscreen="true" 
+                        loading="eager" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+
+	<Footer />
+</Layout>

@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@theme {
+    --color-primary: #151515;
+    --color-theme-bgprimary:#151515;
+    --color-theme-button:#B67F1F;
+    --color-theme-button-hover:#7F5101;
+    --color-theme-contact-background:rgba(31, 31, 31, 0.54);
+
+}
