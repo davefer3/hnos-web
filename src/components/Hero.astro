@@ -34,12 +34,10 @@
 
 <script>
 
-  window.addEventListener("load", startBackgroundTransition);
+  window.addEventListener("load", changeHeroImage);
   var container = document.getElementById('hero-image');
-
-  function startBackgroundTransition() {
-
-    var images = [
+  
+  var images = [
       'images/banners/iturbi-1.jpg',
       'images/banners/san-fermin-1.png',
       'images/banners/alaquas-1.png',
@@ -47,23 +45,23 @@
       'images/banners/food-2.png',
       'images/banners/food-3.png'
     ]
-  
-    function delayedLoop(x:number) {
-      if (x < images.length) {
-        container?.setAttribute('src',images[x])
 
-        setTimeout(function () {
-            delayedLoop(x + 1);
-        }, 8000);
-      }else{
-        delayedLoop(0);
-      }
-    }
+  function changeHeroImage(){
+    for (let x = 0; x <= images.length; x++) {
+                    setBgImage(x);
+    }            
+  }
+
+  function setBgImage(n:number){
+    setTimeout(() => {
+      container?.setAttribute('src',images[n])
+      if(n>=images.length)changeHeroImage();
+    }, n*8000);
+  }           
+
+
       
-      
-      // Start the loop with the first item
-      delayedLoop(Math.floor(Math.random() * images.length));
       
     
-  }
+  
 </script>

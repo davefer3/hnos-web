@@ -124,14 +124,11 @@ const map = location.maps;
 
         <script define:vars={{location}}>
             
-            window.addEventListener("load", startBackgroundTransition);
+            window.addEventListener("load", changeHeroImage);
             var container = document.getElementById('hero-image');
+            var images = [];
 
-            function startBackgroundTransition() {
-
-                var images = [];
-
-                switch (location.loc) {
+            switch (location.loc) {
                     case "iturbi":
                         images = [
                             '/images/banners/iturbi-1.jpg',
@@ -146,7 +143,7 @@ const map = location.maps;
                             '/images/banners/food-1.png',
                         ]
                         break;
-                    case "alquas":
+                    case "alaquas":
                         images = [
                             '/images/banners/alaquas-1.png',
                             '/images/banners/food-1.png',
@@ -159,27 +156,25 @@ const map = location.maps;
                         break;
                 
                     default:
+                      
                         break;
-                }
-            
-                function delayedLoop(x) {
-                    if (x < images.length) {
-                        container?.setAttribute('src',images[x])
-
-                        setTimeout(function () {
-                            delayedLoop(x + 1);
-                        }, 8000);
-                    }else{
-                        delayedLoop(0);
-                    }
-                }
-                
-                
-                // Start the loop with the first item
-                delayedLoop(0);
-                
-                
             }
+
+            function changeHeroImage(){
+                for (let x = 0; x <= images.length; x++) {
+                    setBgImage(x);
+                }
+            }
+
+            function setBgImage(n){
+                setTimeout(() => {
+                    container?.setAttribute('src',images[n])
+                    if(n>=images.length)changeHeroImage();
+                }, n*8000);
+            }
+
+
+          
         </script>
 
 	<Footer />
