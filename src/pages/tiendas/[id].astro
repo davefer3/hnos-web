@@ -7,7 +7,7 @@ export async function getStaticPaths(){
 		{
 			params:{id:"iturbi"},
 			props:{
-                banner:"/images/hero.jpg",
+                loc:"iturbi",
 				name:"José Iturbi 10",
 				contact:"961 290 180",
 				schedule:"De Martes a Domingo - 09:00am a 15:30pm",
@@ -17,7 +17,7 @@ export async function getStaticPaths(){
         {
             params:{id:"san-fermin"},
             props:{
-                banner:"/images/placeholder.png",
+                loc:"san-fermin",
                 name:"San Fermín 1",
                 contact:"961 575 412",
                 schedule:"De Martes a Domingo - 09:00am a 15:30pm",
@@ -27,7 +27,7 @@ export async function getStaticPaths(){
         {
             params:{id:"alaquas"},
             props:{
-                banner:"/images/placeholder.png",
+                loc:"alaquas",
                 name:"Av. Blasco Ibañez 25",
                 contact:"961 506 013",
                 schedule:"De Martes a Domingo - 09:00am a 15:30pm",
@@ -37,7 +37,7 @@ export async function getStaticPaths(){
         {
             params:{id:"picaña"},
             props:{
-                banner:"/images/placeholder.png",
+                loc:"picaña",
                 name:"Pl. del País Valencià 1",
                 contact:"961 592 535",
                 schedule:"De Martes a Domingo - 09:00am a 15:30pm",
@@ -49,14 +49,15 @@ export async function getStaticPaths(){
    
 }
 
+
+
+
 const location = Astro.props;
 
 const name = location.name;
-const banner = location.banner;
 const contact = location.contact;
 const schedule = location.schedule;
 const map = location.maps;
-
 ---
 
 <Layout>
@@ -80,12 +81,12 @@ const map = location.maps;
         <div class="relative h-full text-white overflow-hidden">
             
             <div class="absolute inset-0">
-              <img src=`${banner}` alt="Empleado de Pollos Asados Hnos. Fernández Ruíz Trabajando" class="object-cover object-center w-full h-full" />
+              <img id="hero-image" src="/images/banners/food-3.png" alt=" " class="object-cover w-full h-full" />
               <div class="absolute inset-0 bg-black opacity-50"></div>
             </div>
             
             <div class="relative z-10 flex flex-col justify-center items-center h-full text-center">
-              <h1 class="lg:text-9xl text-5xl font-bold lg:leading-[1] mb-4 mx-4"> {name} </h1>
+              <h1 class="z-90 lg:text-9xl text-5xl font-bold lg:leading-[1] mb-4 mx-4"> {name} </h1>
             </div>
           </div>
         </section>
@@ -121,6 +122,65 @@ const map = location.maps;
             </div>
         </section>
 
+        <script define:vars={{location}}>
+            
+            window.addEventListener("load", startBackgroundTransition);
+            var container = document.getElementById('hero-image');
+
+            function startBackgroundTransition() {
+
+                var images = [];
+
+                switch (location.loc) {
+                    case "iturbi":
+                        images = [
+                            '/images/banners/iturbi-1.jpg',
+                            '/images/banners/food-3.png',
+                            '/images/banners/food-1.png',
+                        ]
+                        break;
+                    case "san-fermin":
+                        images = [
+                            '/images/banners/san-fermin-1.png',
+                            '/images/banners/food-2.png',
+                            '/images/banners/food-1.png',
+                        ]
+                        break;
+                    case "alquas":
+                        images = [
+                            '/images/banners/alaquas-1.png',
+                            '/images/banners/food-1.png',
+                        ]
+                        break;
+                    case "picaña":
+                        images =[
+                            '/images/placeholder.png',
+                        ]
+                        break;
+                
+                    default:
+                        break;
+                }
+            
+                function delayedLoop(x) {
+                    if (x < images.length) {
+                        container?.setAttribute('src',images[x])
+
+                        setTimeout(function () {
+                            delayedLoop(x + 1);
+                        }, 8000);
+                    }else{
+                        delayedLoop(0);
+                    }
+                }
+                
+                
+                // Start the loop with the first item
+                delayedLoop(0);
+                
+                
+            }
+        </script>
 
 	<Footer />
 </Layout>
